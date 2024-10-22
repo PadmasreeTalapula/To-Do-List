@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>
+</title>
+<style>
+body{
+font-family:sans-serif;
+margin:0;
+padding:0;
+background:white;
+}
+h1{
+text-align:center;
+color:grey;
+}
+.container{
+backgruond:blue;
+padding:10px;
+margin:20px auto;
+box-shadow: 0 0 10px yellow;
+max-width:25%;
+}
+input[type="text"]{
+margin:20px;
+padding:20px;
+background:white;
+width:60%;
+}
+button{
+cursor:pointer;
+border:none;
+padding:10px;
+background:green;
+box-shadow:0 0 3px blue;
+}
+button:hover{
+background:pink;
+}
+ul{
+list-style:none;
+padding:0;
+}
+li{
+display:flex;
+justify-content:space-between;
+align-item:center;
+padding:20px;
+border-bottom:1px solid blue;
+}
+li span{
+flex-grow:1;
+}
+.delete{
+background:tomato;
+padding:10px;
+color:black;
+}
+.delete:hover{
+background:pink;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>MY TO-DO LIST</h1>
+<input type="text" id="newTask"  placeholder="add a new task">
+<button id="addtask">Add a Task</button>
+<ul id="tasklist">
+</ul>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+$('#addtask').on('click',function(){
+var newTask=$('#newTask').val();
+ if(newTask!==''){
+   $('#tasklist').append('<li><span>'+ newTask +'</span><button class="delete">Delete</button></li>');
+     $('#newTask').val(" ");
+}
+});
+$('#tasklist').on('click','.delete',function() {
+    $(this).closest('li').remove();
+});
+});
+</script>
+</body>
+</html>
