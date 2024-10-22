@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #taskManager {
+            width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .task input[type="text"] {
+            width: 60%;
+            padding: 5px;
+        }
+
+        .task button {
+            cursor: pointer;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div id="taskManager">
+        <h2>Note Making App</h2>
+        <textarea type="text" id="newTaskInput" placeholder="Enter a new Note"></textarea>
+        <button onclick="addTask()">Add Note</button>
+
+        <div id="tasks">
+        </div>
+    </div>
+
+    <script>
+        function addTask() {
+            var newTaskInput = document.getElementById("newTaskInput");
+            var taskText = newTaskInput.value.trim();
+
+            if (taskText === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            var tasksContainer = document.getElementById("tasks");
+
+            var taskElement = document.createElement("div");
+            taskElement.className = "task";
+            taskElement.innerHTML = `
+                <input type="text" value="${taskText}" disabled>
+                <button onclick="editTask(this)">Edit</button>
+                <button onclick="removeTask(this)">Remove</button>
+            `;
+
+            tasksContainer.appendChild(taskElement);
+            newTaskInput.value = ""; 
+        }
+
+        function editTask(button) {
+            var task = button.parentNode;
+            var inputField = task.querySelector('input[type="text"]');
+            inputField.disabled = !inputField.disabled;
+
+            if (!inputField.disabled) {
+                inputField.focus();
+            }
+        }
+
+        function removeTask(button) {
+            var task = button.parentNode;
+            task.parentNode.removeChild(task);
+        }
+    </script>
+</body>
+</html>
